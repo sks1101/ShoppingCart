@@ -27,6 +27,7 @@ builder.Services.AddTransient<ISearchRepository , SearchRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
 builder.Services.AddTransient<ICartRepository, CartRepository>();
 builder.Services.AddTransient<IOrdersRepository, OrdersRepository>();
+builder.Services.AddTransient<IEmailService, EmailService>();
 
 
 builder.Services.AddAuthentication(option =>
@@ -81,6 +82,7 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
+builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSettings"));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

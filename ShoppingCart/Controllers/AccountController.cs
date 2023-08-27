@@ -10,18 +10,27 @@ namespace ShoppingCart.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountRepository _accountRepository;
+        private readonly IEmailService _emailService;
+        private readonly ILogger<AccountController> _logger;
 
-        public AccountController(IAccountRepository accountRepository)
+        public AccountController(IAccountRepository accountRepository, IEmailService emailService, ILogger<AccountController> logger)
         {
             _accountRepository = accountRepository;
+            _emailService = emailService;
+            _logger = logger;
         }
 
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] SignUp signUpModel)
         {
             var result = await _accountRepository.SignUpAsync(signUpModel);
+            MailRequest mailrequest = new MailRequest();
+            mailrequest.ToEmail = "sameerksahu1120@gmail.com";
+            mailrequest.Subject = "Welcome Techiees";
+            mailrequest.Body = "Thanks For Using";
             if (result.Succeeded)
             {
+                await _emailService.SendEmailAsync(mailrequest);
                 return Ok(result.Succeeded);
             }
             return Unauthorized();
@@ -39,6 +48,24 @@ namespace ShoppingCart.Controllers
 
             return Ok(result);
         }
-
+        //[HttpPost("SendMail")]
+        //public async Task<IActionResult> SendMail()
+        //{
+        //    try
+        //    {
+        //        //_logger.LogInformation("start email sending");
+        //        MailRequest mailrequest = new MailRequest();
+        //        mailrequest.ToEmail = "sameerksahu1120@gmail.com";
+        //        mailrequest.Subject = "Welcome Techiees";
+        //        mailrequest.Body = "Thanks For Using";
+        //        await _emailService.SendEmailAsync(mailrequest);
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // _logger.LogError("not send email");
+        //        throw;
+        //    }
+        //}
     }
 }

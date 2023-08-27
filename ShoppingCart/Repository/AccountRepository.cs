@@ -60,5 +60,7 @@ namespace ShoppingCart.Repository
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
+
     }
 }
