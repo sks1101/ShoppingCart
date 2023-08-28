@@ -4,6 +4,6 @@ namespace ShoppingCart.Repository
 {
     public interface ISearchRepository
     {
-        Task<ProductModel> GetProductByName(string name);
+        Task<List<ProductModel>> GetProductByName(string name);
     }
 }

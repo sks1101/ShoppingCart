@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.Models;
 using ShoppingCart.Repository;
+using System.Security.Cryptography;
 
 namespace ShoppingCart.Controllers
 {
@@ -25,9 +26,9 @@ namespace ShoppingCart.Controllers
         {
             var result = await _accountRepository.SignUpAsync(signUpModel);
             MailRequest mailrequest = new MailRequest();
-            mailrequest.ToEmail = "sameerksahu1120@gmail.com";
-            mailrequest.Subject = "Welcome Techiees";
-            mailrequest.Body = "Thanks For Using";
+            mailrequest.ToEmail = "Sameerksahu1120@gmail.com";
+            mailrequest.Subject = "Welcome To ShopKart";
+            mailrequest.Body = "Hello, " + signUpModel.Name+ "- Thank you for being a member of the ShopKart community.";
             if (result.Succeeded)
             {
                 await _emailService.SendEmailAsync(mailrequest);

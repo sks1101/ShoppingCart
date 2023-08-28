@@ -6,5 +6,6 @@ namespace ShoppingCart.Repository
     {
         Task<List<OrderModel>> TotalItem();
         Task<double> TotalPrice();
+        Task ExecuteOrder();
     }
 }

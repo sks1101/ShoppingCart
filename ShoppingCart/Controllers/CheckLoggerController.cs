@@ -19,13 +19,13 @@ namespace ShoppingCart.Controllers
         {
             if (id > 0)
             {
-                _logger.LogInformation("Successfully Entered");
-                return "Successfully Entered ";
+                _logger.LogInformation("Valid Input");
+                return "Valid Input ";
             }
             else
             {
-                _logger.LogError("Not Entered");
-                return "Not Entered";
+                _logger.LogError("InValid Input");
+                return "InValid Input";
             }
         }
     }

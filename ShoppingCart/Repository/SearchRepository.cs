@@ -14,7 +14,7 @@ namespace ShoppingCart.Repository
             _Context = Context;
         }
 
-        public async Task<ProductModel> GetProductByName(string name)
+        public async Task<List<ProductModel>>GetProductByName(string name)
         {
             var record = await _Context.Products.Where(x => x.ProductName.Contains(name)).Select(x => new ProductModel()
             {
@@ -23,7 +23,7 @@ namespace ShoppingCart.Repository
                 ProductDescription = x.ProductDescription,
                 ProductPrice = x.ProductPrice,
                 Stock = x.Stock
-            }).FirstOrDefaultAsync();
+            }).ToListAsync();
 
             return record;
         }
